@@ -1,7 +1,12 @@
+const { connectionDB } = require("../database/db.config");
 class Server {
   constructor(express) {
     this.app = express();
     this.uses(express.static("public"));
+    this.connection();
+  }
+  async connection() {
+    await connectionDB();
   }
   routes(endpoint, router) {
     this.app.use(endpoint, router);
